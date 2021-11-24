@@ -1,4 +1,5 @@
-document.getElementById("name").focus();
+const name = document.getElementById("name");
+name.focus();
 
 const otherJobRole = document.getElementById("other-job-role")
 const job = document.getElementById("title")
@@ -75,4 +76,61 @@ pay.addEventListener("change", (e)=> {
   }
 });
 
+//form validation
+const email = document.getElementById("email");
+const ccNum = document.getElementById("cc-num");
+const zip = document.getElementById("zip");
+const cvv = document.getElementById("cvv");
+const form = document.querySelector("form");
+
+console.log(name)
+console.log(email)
+console.log(ccNum)
+console.log(zip)
+console.log(cvv)
+console.log(form)
+
+function validEmail () {
+  const emailValue = email.value;
+  const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
+  if (emailIsValid === false) {
+    event.preventDefault();
+  }
+}
+
+function validCC () {
+  const cardValue = ccNum.value;
+  const cardNumberIsValid = /^\d{13,16}$/.test(cardValue);
+  if (cardNumberIsValid === false) {
+    event.preventDefault();
+  }
+}
+
+function validZip () {
+  const zipValue = zip.value;
+  const zipIsValid = /[0-9]{5}/.test(zipValue);
+  if (zipIsValid === false) {
+    event.preventDefault();
+  }
+}
+
+function validCVV () {
+  const cvvValue = cvv.value;
+  const cvvIsValid = /[0-9]{3}/.test(cvvValue);
+  if (cvvIsValid === false) {
+    event.preventDefault();
+  }
+}
+
+form.addEventListener("submit", () => {
+  const nameValue = name.value;
+  const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
+  if (nameIsValid === false) {
+    event.preventDefault();
+  } 
+  validEmail();
+  validCC();
+  validZip ();
+  validCVV();
+});
 
