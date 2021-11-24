@@ -51,3 +51,28 @@ activities.addEventListener("change", (e) => {
   totalCost.innerHTML = `<p>Total: $${total}</p>`
 });
 
+//payment
+
+const pay = document.getElementById("payment");
+const creditCard = document.getElementById("credit-card");
+const paypal = document.getElementById("paypal");
+const bitcoin = document.getElementById("bitcoin");
+
+paypal.style.display = "none";
+bitcoin.style.display = "none";
+
+pay.children[1].setAttribute("selected", "selected");
+pay.addEventListener("change", (e)=> {
+  if (e.target.value === "paypal") {
+    paypal.style.display = "block";
+    bitcoin.style.display = "none";
+  }else if (e.target.value === "bitcoin") {
+    bitcoin.style.display = "block";
+    paypal.style.display ="none";
+  }else if (e.target.value === "credit-card") {
+    bitcoin.style.display = "none";
+    paypal.style.display ="none";
+  }
+});
+
+
