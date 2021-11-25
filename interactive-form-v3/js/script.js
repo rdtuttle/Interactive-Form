@@ -83,18 +83,35 @@ const zip = document.getElementById("zip");
 const cvv = document.getElementById("cvv");
 const form = document.querySelector("form");
 
-console.log(name)
-console.log(email)
-console.log(ccNum)
-console.log(zip)
-console.log(cvv)
-console.log(form)
+function validName () {
+  const nameValue = name.value;
+  const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
+  if (nameIsValid === false) {
+    event.preventDefault();
+    name.parentElement.className = "not-valid";
+    name.parentElement.classList.remove("valid");
+    name.parentElement.lastElementChild.style.display = "block";
+  } else {
+    name.parentElement.className = "valid";
+    name.parentElement.classList.remove("not-valid");
+    name.parentElement.lastElementChild.style.display = "none"
+
+  }
+}
 
 function validEmail () {
   const emailValue = email.value;
-  const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
+  const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/.test(emailValue);
   if (emailIsValid === false) {
     event.preventDefault();
+    email.parentElement.className = "not-valid";
+    email.parentElement.classList.remove("valid");
+    email.parentElement.lastElementChild.style.display = "block";
+  } else {
+   email.parentElement.className = "valid";
+   email.parentElement.classList.remove("not-valid");
+   email.parentElement.lastElementChild.style.display = "none"
+
   }
 }
 
@@ -103,6 +120,13 @@ function validCC () {
   const cardNumberIsValid = /^\d{13,16}$/.test(cardValue);
   if (cardNumberIsValid === false) {
     event.preventDefault();
+    ccNum.parentElement.className = "not-valid";
+    ccNum.parentElement.classList.remove("valid");
+    ccNum.parentElement.lastElementChild.style.display = "block";
+  }else  {
+    ccNum.parentElement.className = "valid";
+    ccNum.parentElement.classList.remove("not-valid");
+    ccNum.parentElement.lastElementChild.style.display = "none"
   }
 }
 
@@ -111,6 +135,21 @@ function validZip () {
   const zipIsValid = /[0-9]{5}/.test(zipValue);
   if (zipIsValid === false) {
     event.preventDefault();
+    zip.parentElement.className = "not-valid";
+    zip.parentElement.classList.remove("valid");
+    zip.parentElement.lastElementChild.style.display = "block";
+  }else{
+    zip.parentElement.className = "valid";
+    zip.parentElement.classList.remove("not-valid");
+    zip.parentElement.lastElementChild.style.display = "none"
+  }
+}
+
+function validForm () {
+  if (total = 0) {
+    form.parentElement.className = "not-valid";
+    form.parentElement.classList.remove("valid");
+    form.parentElement.lastElementChild.style.display = "block"
   }
 }
 
@@ -119,18 +158,46 @@ function validCVV () {
   const cvvIsValid = /[0-9]{3}/.test(cvvValue);
   if (cvvIsValid === false) {
     event.preventDefault();
+    cvv.parentElement.className = "not-valid";
+    cvv.parentElement.classList.remove("valid");
+    cvv.parentElement.lastElementChild.style.display = "block"
+  } else  {
+    cvv.parentElement.className = "valid";
+    cvv.parentElement.classList.remove("not-valid");
+    cvv.parentElement.lastElementChild.style.display = "none"
   }
 }
 
+function validForm () {
+  activities.classList.add('not-valid');
+  document.getElementById('activities-hint').style.display = 'contents';
+if ( total !== 0) {
+  activities.classList.add('valid');
+  activities.classList.remove('not-valid');
+  document.getElementById('activities-hint').style.display = 'none';
+}
+}
+
+
+
 form.addEventListener("submit", () => {
-  const nameValue = name.value;
-  const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
-  if (nameIsValid === false) {
-    event.preventDefault();
-  } 
+  validName();
   validEmail();
   validCC();
   validZip ();
   validCVV();
+  validForm();
 });
+
+//accessibility
+
+const checkbox = document.querySelectorAll("input[type=checkbox]");
+for (let i=0; i < checkbox.length; i++) {
+  checkbox[i].addEventListener("focus", () => {
+    checkbox[i].parentElement.classList.add("focus")
+  });
+  checkbox[i].addEventListener("blur", () => {
+    checkbox[i].parentElement.classList.remove("focus")
+  });
+}
 
