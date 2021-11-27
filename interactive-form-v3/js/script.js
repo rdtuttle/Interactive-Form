@@ -27,7 +27,7 @@ job.addEventListener ("change", ()=> {
 });
 //event listener to set T-Shirt Design to coorespond with matching colors in dropdown menu
 color.disabled = true;
-design.addEventListener("change", () => {
+design.addEventListener("change", (event) => {
   color.disabled = false;
   for (let i = 0; i < color.children.length; i++) {
     const value = event.target.value;
@@ -35,10 +35,10 @@ design.addEventListener("change", () => {
     const option = color.children[i];
     if (value === attribute) {
       option.hidden = false;
-      option.setAttribute("selected", true);
+      option.selected =true;
     } else {
       option.hidden = true;
-      option.setAttribute("selected", false);
+      option.selected = false;
     }
   }
 });
@@ -65,12 +65,15 @@ pay.addEventListener("change", (e)=> {
   if (e.target.value === "paypal") {
     paypal.style.display = "block";
     bitcoin.style.display = "none";
+    creditCard.style.display = "none";
   }else if (e.target.value === "bitcoin") {
     bitcoin.style.display = "block";
     paypal.style.display ="none";
+    creditCard.style.display = "none";
   }else if (e.target.value === "credit-card") {
     bitcoin.style.display = "none";
     paypal.style.display ="none";
+    creditCard.style.display = "block";
   }
 });
 
