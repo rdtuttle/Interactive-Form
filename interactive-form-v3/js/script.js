@@ -157,12 +157,18 @@ function validForm () {
   }
 }
 form.addEventListener("submit", () => {
-  validName();
-  validEmail();
+  
+  if (pay.value === "credit-card") {
   validCC();
   validZip ();
   validCVV();
+  validName();
+  validEmail();
   validForm();
+  } else {validName();
+  validEmail();
+  validForm();
+  }
 });
 
 //adds additional highlighting for accessibility
